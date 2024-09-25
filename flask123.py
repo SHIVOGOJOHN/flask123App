@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import logging
+import os
 
 app = Flask(__name__)
 
@@ -72,4 +73,6 @@ def timeout():
     return jsonify({"ResultCode": 0, "ResultDesc": "Success"}), 200
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    # Set host to '0.0.0.0' and port to environment variable or 5000 for local testing
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
+
